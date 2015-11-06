@@ -1,0 +1,37 @@
+{
+    "name": "vegas-cmf/mvc",
+    "type": "library",
+    "description": "Vegas CMF MVC",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Amsterdam Standard Vegas Team",
+            "email": "vegas@amsterdam-standard.pl"
+        }
+    ],
+    "repositories": [
+        {
+            "type" : "git",
+            "url" : "https://github.com/vegas-cmf/common.git",
+            "branch" : "master"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "ext-phalcon": ">=2.0",
+        "phalcon/incubator": ">=2.0",
+        "vegas-cmf/common" : "*"
+    },
+    "require-dev": {
+        "phalcon/devtools" : "2.0.8",
+        "phpunit/phpunit": "4.*",
+        "satooshi/php-coveralls": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Vegas\\Mvc\\": "src/",
+            "Vegas\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability" : "dev"
+}
