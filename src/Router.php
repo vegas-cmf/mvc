@@ -30,21 +30,21 @@ class Router extends \Phalcon\Mvc\Router
          */
         $route = new Route($pattern, $paths, $httpMethods);
 
-		switch ($position) {
+        switch ($position) {
 
             case parent::POSITION_LAST:
                 $this->_routes[] = $route;
-				break;
+                break;
 
             case parent::POSITION_FIRST:
                 $this->_routes = array_merge([$route], $this->_routes);
-				break;
+                break;
 
             default:
                 throw new Exception("Invalid route position");
         }
 
-		return $route;
+        return $route;
     }
 
     /**

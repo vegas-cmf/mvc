@@ -18,19 +18,19 @@ class Group extends \Phalcon\Mvc\Router\Group
      * Adds a route applying the common attributes
      */
     protected function _addRoute($pattern, $paths = null, $httpMethods = null)
-	{
-		/**
+    {
+        /**
          * Check if the paths need to be merged with current paths
          */
-		$defaultPaths = $this->_paths;
+        $defaultPaths = $this->_paths;
 
-		if (is_array($defaultPaths)) {
+        if (is_array($defaultPaths)) {
 
-			if (is_string($paths)) {
-				$processedPaths = Route::getRoutePaths($paths);
-			} else {
+            if (is_string($paths)) {
+                $processedPaths = Route::getRoutePaths($paths);
+            } else {
                 $processedPaths = $paths;
-			}
+            }
 
             if (is_array($processedPaths)) {
                 /**
@@ -51,6 +51,6 @@ class Group extends \Phalcon\Mvc\Router\Group
         $this->_routes[] = $route;
 
         $route->setGroup($this);
-		return $route;
-	}
+        return $route;
+    }
 }
