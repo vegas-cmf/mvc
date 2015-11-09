@@ -8,7 +8,12 @@
 namespace Vegas\Mvc;
 
 use Phalcon\Config;
+use Phalcon\Events\Manager;
 use Phalcon\Http\ResponseInterface;
+use Vegas\Mvc\ModuleManager\EventListener\Boot as ModuleManagerBootEventListener;
+use Vegas\Mvc\Router\EventListener\Boot as RouterBootEventListener;
+use Vegas\Mvc\Autoloader\EventListener\Boot as AutoloaderBootEventListener;
+use Vegas\Mvc\View\EventListener\Boot as ViewBootEventListener;
 use Vegas\Mvc\Router;
 
 /**
@@ -35,11 +40,15 @@ class Application extends \Phalcon\Mvc\Application
 	/**
 	 * Application constructor.
 	 * @param \Phalcon\DiInterface|null $dependencyInjector
+	 * @param Config $config
 	 */
 	public function __construct(\Phalcon\DiInterface $dependencyInjector = null, Config $config)
 	{
 		parent::__construct($dependencyInjector);
 		$this->config = $config;
+		$this->_eventsManager = new Manager();
+
+		$this->attachBootstrapEvents();
 	}
 
 	/**
@@ -77,30 +86,12 @@ class Application extends \Phalcon\Mvc\Application
 	/**
 	 * @return $this
 	 */
-	public function bootstrap()
+	protected function attachBootstrapEvents()
 	{
-		// Registers modules
-		$this->moduleManager = new ModuleManager($this);
-		$this->moduleManager->setModulesDirectory($this->getConfig()->application->modulesDirectory);
-
-		$modules = $this->getConfig()->application->modules;
-		$this->moduleManager->registerModules($modules ? $modules->toArray() : []);
-
-		// Setup configs
-		$this->getConfig()->merge($this->moduleManager->getConfigs($this->getModules()));
-
-		// Initializes router
-		$router = new Router();
-		// default routes
-		if (isset($this->getConfig()->application->defaultRoutes)) {
-			$defaultRoutesPath = $this->getConfig()->application->defaultRoutes;
-			if (file_exists($defaultRoutesPath)) {
-				require_once($defaultRoutesPath);
-			}
-		}
-		// Modules routes
-		(new Router\Loader())->autoload($modules, $router);
-		$this->getDI()->setShared('router', $router);
+		$this->getEventsManager()->attach('application', new ModuleManagerBootEventListener());
+		$this->getEventsManager()->attach('application', new RouterBootEventListener());
+		$this->getEventsManager()->attach('application', new AutoloaderBootEventListener());
+		$this->getEventsManager()->attach('application', new ViewBootEventListener());
 
 		return $this;
 	}
@@ -122,7 +113,7 @@ class Application extends \Phalcon\Mvc\Application
 		/**
          * Call boot event, this allow the developer to perform initialization actions
          */
-		if ($eventsManager instanceof \Phalcon\Events\Manager) {
+		if ($eventsManager instanceof Manager) {
             if ($eventsManager->fire("application:boot", $this) === false) {
                 return false;
             }
@@ -130,6 +121,7 @@ class Application extends \Phalcon\Mvc\Application
 
 		$router = $di->getShared("router");
 
+//		print_r($this->getModules());die;
 		/**
          * Handle the URI pattern (if any)
          */
@@ -150,7 +142,7 @@ class Application extends \Phalcon\Mvc\Application
          */
 		if ($moduleName) {
 
-            if ($eventsManager instanceof \Phalcon\Events\Manager) {
+            if ($eventsManager instanceof Manager) {
                 if ($eventsManager->fire("application:beforeStartModule", $this, $moduleName) === false) {
                     return false;
                 }
@@ -201,7 +193,7 @@ class Application extends \Phalcon\Mvc\Application
 			/**
              * Calling afterStartModule event
              */
-			if ($eventsManager instanceof \Phalcon\Events\Manager) {
+			if ($eventsManager instanceof Manager) {
                 $eventsManager->fire("application:afterStartModule", $this, $moduleObject);
 			}
 
@@ -227,7 +219,7 @@ class Application extends \Phalcon\Mvc\Application
 		/**
          * Calling beforeHandleRequest
          */
-		if ($eventsManager instanceof \Phalcon\Events\Manager) {
+		if ($eventsManager instanceof Manager) {
             if ($eventsManager->fire("application:beforeHandleRequest", $this, $dispatcher) === false) {
                 return false;
             }
@@ -259,7 +251,7 @@ class Application extends \Phalcon\Mvc\Application
 			/**
              * Calling afterHandleRequest
              */
-			if ($eventsManager instanceof \Phalcon\Events\Manager) {
+			if ($eventsManager instanceof Manager) {
                 $eventsManager->fire("application:afterHandleRequest", $this, $controller);
 			}
 
@@ -275,7 +267,7 @@ class Application extends \Phalcon\Mvc\Application
 						/**
                          * This allows to make a custom view render
                          */
-						if ($eventsManager instanceof \Phalcon\Events\Manager) {
+						if ($eventsManager instanceof Manager) {
                             $renderStatus = $eventsManager->fire("application:viewRender", $this, $di->get('view'));
 						}
 
@@ -340,7 +332,7 @@ class Application extends \Phalcon\Mvc\Application
 		/**
          * Calling beforeSendResponse
          */
-		if ($eventsManager instanceof \Phalcon\Events\Manager) {
+		if ($eventsManager instanceof Manager) {
             $eventsManager->fire("application:beforeSendResponse", $this, $response);
 		}
 

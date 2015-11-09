@@ -47,65 +47,15 @@ class RouterTest extends \PHPUnit_Framework_TestCase
     public function testRouteMatching()
     {
         $di = new \Phalcon\DI\FactoryDefault();
+        $config = new \Phalcon\Config(require TESTS_ROOT_DIR . '/fixtures/app/config/config.php');
 
-        $app = new \Vegas\Mvc\Application();
-        $app->setDI($di);
-        $app->useImplicitView(true);
-        $app->setModulesDirectory('modules/');
-        $app->registerModules([
-            'Test' => [
-                'path' => APP_ROOT . '/app/modules/Test',
-                'className' => 'Test\\Module',
-                'viewsDir' => 'modules/Test/View'
-            ]
-        ]);
-
-        $loader = new Loader();
-
-        $loader->registerNamespaces(
-            array(
-                'Test' => APP_ROOT . '/app/modules/Test'
-            )
-        );
-
-        $loader->register();
-
-
-        $view = new View();
-        $view->setViewsDir(APP_ROOT . '/app/');
-        $view->setLayoutsDir('layouts/');
-        $view->setLayout('main');
-        $di->setShared('view', $view);
-
-        $di->set('router', function() use ($di) {
-            $router = new Router(false);
-            $router->setDI($di);
-
-
-            $router->add('/test', [
-                'module' => 'Test',
-                'controller' => 'Frontend\Index',
-                'action' => 'index'
-            ])
-                ->pushFilter(
-                    new TestPlugin()
-                )
-                ->pushFilter(new TestAfterPlugin())
-                ->beforeMatch(function($uri, $route) {
-                    echo "BeforeMatch!";
-                    return true;
-                });
-
-            require APP_ROOT . '/app/modules/Test/Config/routes.php';
-
-            return $router;
-        });
+        $app = new \Vegas\Mvc\Application($di, $config);
 
         $response = $app->handle('/test');
-        echo $response->getContent();
-        $response = $app->handle('/test/ip');
-        echo $response->getContent();
-
+//        echo $response->getContent();
+//        $response = $app->handle('/test/ip');
+//        echo $response->getContent();
+//
         $di->get('Test\Service\Foo', [123])->bar();
     }
 }

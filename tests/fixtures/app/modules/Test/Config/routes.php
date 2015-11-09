@@ -1,12 +1,17 @@
 <?php
-$group = $router->createGroup([
-    'module' => 'Test',
-]);
-$group->pushFilterBefore(new \Test\Filter\IPPlugin());
-$group->setPrefix('/test');
-$group->add('/ip', [
-    'controller' => 'Index',
-    'action' => 'ip'
-]);
+use Vegas\Tests\Mvc\Router\TestAfterPlugin;
+use Vegas\Tests\Mvc\Router\TestPlugin;
 
-$router->mount($group);
+$router->add('/test', [
+    'module' => 'Test',
+    'controller' => 'Frontend\Index',
+    'action' => 'index'
+])
+    ->pushFilter(
+        new TestPlugin()
+    )
+    ->pushFilter(new TestAfterPlugin())
+    ->beforeMatch(function($uri, $route) {
+        echo "BeforeMatch!";
+        return true;
+    });

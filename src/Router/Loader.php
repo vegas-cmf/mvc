@@ -26,7 +26,7 @@ class Loader
     public function autoload(array $modules, Router $router)
     {
         foreach ($modules as $moduleName => $moduleConfig) {
-            $routesPath = Path::join($moduleConfig['path'], ModuleManager::MODULE_CONFIG_DIR, self::ROUTES_FILE);
+            $routesPath = Path::join($moduleConfig['dir'], ModuleManager::MODULE_CONFIG_DIR, self::ROUTES_FILE);
             if (file_exists($routesPath)) {
                 require_once($routesPath);
             }

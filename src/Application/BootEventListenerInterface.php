@@ -10,15 +10,15 @@ use Phalcon\Events\Event;
 use Vegas\Mvc\Application;
 
 /**
- * Interface BootstrapEventInterface
+ * Interface BootstrapEventListenerInterface
  * @package Vegas\Mvc\Application
  */
-interface BootstrapEventInterface
+interface BootEventListenerInterface
 {
     /**
      * @param Event $event
      * @param Application $application
      * @return mixed
      */
-    public function onBootstrap(Event $event, Application $application);
+    public function boot(Event $event, Application $application);
 }

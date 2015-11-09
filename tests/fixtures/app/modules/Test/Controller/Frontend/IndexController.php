@@ -4,7 +4,7 @@
  * @company Amsterdam Standard Sp. z o.o.
  */
 
-namespace Test\Controller;
+namespace Test\Controller\Frontend;
 
 use Test\Model\Test;
 

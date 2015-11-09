@@ -71,6 +71,7 @@ class ModuleManager implements \Phalcon\Di\InjectionAwareInterface
      */
     public function registerModules(array $modules)
     {
+        $availableModules = [];
         foreach ($modules as $moduleName => &$moduleConfig) {
             if (!$moduleName) {
                 $moduleName = $moduleConfig;
@@ -86,7 +87,7 @@ class ModuleManager implements \Phalcon\Di\InjectionAwareInterface
                 );
             }
 
-            if (isset($moduleConfig['viewsDir']) && $moduleConfig['viewsDir'] !== false) {
+            if (!isset($moduleConfig['viewsDir']) || $moduleConfig['viewsDir'] !== false) {
                 $moduleConfig['viewsDir'] = Path::join(
                     $this->getModulesDirectory(),
                     $moduleName,
@@ -97,9 +98,14 @@ class ModuleManager implements \Phalcon\Di\InjectionAwareInterface
             if (!isset($moduleConfig['className'])) {
                 $moduleConfig['className'] = sprintf('%s\\%s', $moduleName, self::MODULE_BOOTSTRAP);
             }
+
+            $moduleConfig['name'] = $moduleName;
+
+            $moduleConfig['dir'] = dirname($moduleConfig['path']);
+            $availableModules[$moduleName] = $moduleConfig;
         }
 
-        $this->application->registerModules($modules, true);
+        $this->application->registerModules($availableModules, true);
     }
 
     /**
@@ -109,8 +115,9 @@ class ModuleManager implements \Phalcon\Di\InjectionAwareInterface
     public function getConfigs(array $modules)
     {
         $config = new Config();
+
         foreach ($modules as $moduleName => $moduleConfig) {
-            $configPath = Path::join($moduleConfig['path'], self::MODULE_CONFIG_DIR, 'config.php');
+            $configPath = Path::join($moduleConfig['dir'], self::MODULE_CONFIG_DIR, 'config.php');
             if (file_exists($configPath)) {
                 $moduleConfig = require_once($configPath);
                 if (!$moduleConfig instanceof Config) {

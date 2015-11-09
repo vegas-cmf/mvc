@@ -1,6 +1,8 @@
 <?php
 return [
-    'modules' => [
-        'Test'
+    'application' => [
+        'modules' => [
+            'Test'
+        ]
     ]
 ];
