@@ -31,7 +31,7 @@ class Boot implements BootEventListenerInterface
         if (isset($application->getConfig()->application->defaultRoutes)) {
             $defaultRoutesPath = $application->getConfig()->application->defaultRoutes;
             if (file_exists($defaultRoutesPath)) {
-                require_once($defaultRoutesPath);
+                require($defaultRoutesPath);
             }
         }
 

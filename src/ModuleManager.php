@@ -122,7 +122,7 @@ class ModuleManager implements \Phalcon\Di\InjectionAwareInterface
         foreach ($modules as $moduleName => $moduleConfig) {
             $configPath = Path::join($moduleConfig['dir'], self::MODULE_CONFIG_DIR, 'config.php');
             if (file_exists($configPath)) {
-                $moduleConfig = require_once($configPath);
+                $moduleConfig = require($configPath);
                 if (!$moduleConfig instanceof Config) {
                     $moduleConfig = new Config($moduleConfig);
                 }

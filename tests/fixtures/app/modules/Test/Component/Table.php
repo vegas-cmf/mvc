@@ -10,10 +10,22 @@
 namespace Test\Component;
 
 
+use Vegas\Mvc\Component\ComponentAbstract;
+
 class Table extends ComponentAbstract
 {
+    protected $initCount = 0;
+
+    public function initialize()
+    {
+        $increment = ++$this->initCount;
+        $this->setViewParam('initCounter', $increment);
+
+        parent::initialize();
+    }
+
     public function datagrid()
     {
-        return $this->render('datagrid');
+        return $this->getRender('datagrid');
     }
 }

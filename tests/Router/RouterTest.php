@@ -13,6 +13,7 @@ use Phalcon\DI;
 use Phalcon\Loader;
 use Phalcon\Mvc\View;
 use Vegas\Mvc\Router;
+use Vegas\Tests\ApplicationTestCase;
 
 class TestPlugin implements Router\PluginInterface {
 
@@ -43,21 +44,16 @@ class TestAfterPlugin implements Router\PluginInterface {
     }
 }
 
-class RouterTest extends \PHPUnit_Framework_TestCase
+class RouterTest extends ApplicationTestCase
 {
 
     public function testRouteMatching()
     {
-        $di = new \Phalcon\DI\FactoryDefault();
-        $config = new \Phalcon\Config(require TESTS_ROOT_DIR . '/fixtures/app/config/config.php');
-
-        $app = new \Vegas\Mvc\Application($di, $config);
-
-        $response = $app->handle('/test');
+        $response = $this->app->handle('/test');
 //        echo $response->getContent();
-//        $response = $app->handle('/test/ip');
+//        $response = $this->app->handle('/test/ip');
 //        echo $response->getContent();
 //
-        $di->get('Test\Service\Foo', [123])->bar();
+        $this->di->get('Test\Service\Foo', [123])->bar();
     }
 }

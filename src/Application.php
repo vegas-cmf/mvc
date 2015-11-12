@@ -40,6 +40,11 @@ class Application extends \Phalcon\Mvc\Application
     protected $config;
 
     /**
+     * @var bool
+     */
+    protected $isBootstrapped = false;
+
+    /**
      * Application constructor.
      * @param \Phalcon\DiInterface|null $dependencyInjector
      * @param Config $config
@@ -99,11 +104,11 @@ class Application extends \Phalcon\Mvc\Application
     }
 
     /**
-     * @param null $uri
-     * @return mixed|object
+     * Triggers the bootstrap process autoloading modules
+     * @return bool
      * @throws \Exception
      */
-    public function handle($uri = null)
+    public function bootstrap()
     {
         $di = $this->di;
         if (!is_object($di)) {
@@ -121,9 +126,36 @@ class Application extends \Phalcon\Mvc\Application
             }
         }
 
+        return true;
+    }
+
+    /**
+     * @param null $uri
+     * @return mixed|object
+     * @throws \Exception
+     */
+    public function handle($uri = null)
+    {
+        /**
+         * Allow one bootstrap per application instance
+         */
+        if (!$this->isBootstrapped) {
+            $this->isBootstrapped = $this->bootstrap();
+        }
+
+        /**
+         * Refuse to continue if boot process failed
+         */
+        if (!$this->isBootstrapped) {
+            return false;
+        }
+
+        $di = $this->di;
+
+        $eventsManager = $this->_eventsManager;
+
         $router = $di->getShared("router");
 
-//		print_r($this->getModules());die;
         /**
          * Handle the URI pattern (if any)
          */

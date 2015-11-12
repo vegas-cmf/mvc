@@ -30,7 +30,7 @@ class Loader
         foreach ($modules as $moduleName => $moduleConfig) {
             $routesPath = Path::join($moduleConfig['dir'], ModuleManager::MODULE_CONFIG_DIR, self::ROUTES_FILE);
             if (file_exists($routesPath)) {
-                require_once($routesPath);
+                require($routesPath);
             }
         }
 

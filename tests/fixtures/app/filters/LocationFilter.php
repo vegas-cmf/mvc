@@ -11,7 +11,7 @@ namespace App\Filter;
 
 use Vegas\Mvc\Router\PluginInterface;
 
-class LocationPlugin implements PluginInterface
+class LocationFilter implements PluginInterface
 {
 
     public function filter($uri, \Phalcon\Mvc\Router\Route $route)
