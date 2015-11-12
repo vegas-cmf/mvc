@@ -12,38 +12,3 @@ define('APP_ROOT', dirname(__FILE__) . '/fixtures');
 
 $_SERVER['HTTP_HOST'] = 'vegas.dev';
 $_SERVER['REQUEST_URI'] = '/';
-
-//$config = new \Phalcon\Config($configArray);
-//$di = new Phalcon\DI\FactoryDefault();
-
-//$loader = new Loader();
-//$loader->registerNamespaces(
-//    [
-//        "Fixtures\\Collection"    => __DIR__ . "/fixtures/Collection/"
-//    ]
-//);
-//$loader->register();
-
-//$di->set('collectionManager', function() use ($di) {
-//    return new \Phalcon\Mvc\Collection\Manager();
-//}, true);
-//$di->set('mongo', function() use ($config) {
-//    $mongo = new \MongoClient();
-//    return $mongo->selectDb($config->mongo->db);
-//}, true);
-//
-//$di->set('odmMappingCache', function() use ($di, $config) {
-//    $frontCacheClass = $config->mapping->cache->frontend->driverClass;
-//    $frontCache = new $frontCacheClass(
-//        $config->mapping->cache->frontend->parameters->toArray()
-//    );
-//    $backCacheClass = $config->mapping->cache->backend->driverClass;
-//    $cache = new $backCacheClass(
-//        $frontCache,
-//        $config->mapping->cache->backend->parameters->toArray()
-//    );
-//
-//    return $cache;
-//}, true);
-
-//Phalcon\DI::setDefault($di);

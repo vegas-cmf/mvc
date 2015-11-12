@@ -3,6 +3,9 @@ return [
     'application' => [
         'modules' => [
             'Test'
+        ],
+        'sharedServices' => [
+
         ]
     ]
 ];
