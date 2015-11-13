@@ -14,6 +14,10 @@ use Phalcon\Mvc\View;
 use Vegas\Mvc\Application;
 use Vegas\Mvc\Application\BootEventListenerInterface;
 
+/**
+ * Class Boot
+ * @package Vegas\Mvc\View\EventListener
+ */
 class Boot implements BootEventListenerInterface
 {
 
@@ -24,10 +28,14 @@ class Boot implements BootEventListenerInterface
      */
     public function boot(Event $event, Application $application)
     {
-        $view = new View();
-        $view->setViewsDir(APP_ROOT . '/app/');
-        $view->setLayoutsDir('layouts/');
-        $view->setLayout('main');
-        $application->getDI()->setShared('view', $view);
+        $config = $application->getConfig()->application;
+
+        if (isset($config->view) && $config->view !== false) {
+            $view = new View();
+            $view->setViewsDir($config->view->viewsDir);
+            $view->setLayoutsDir($config->view->layoutsDir);
+            $view->setLayout($config->view->layout);
+            $application->getDI()->setShared('view', $view);
+        }
     }
 }

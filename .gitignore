@@ -38,3 +38,4 @@ travis.log
 tests/config.php
 tests/fixtures/app/config/config.php
 config.php.dist
+tests/fixtures/cache

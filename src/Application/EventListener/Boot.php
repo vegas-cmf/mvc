@@ -7,7 +7,7 @@
  * @homepage http://cmf.vegas
  */
 
-namespace Vegas\Mvc\Autoloader\EventListener;
+namespace Vegas\Mvc\Application\EventListener;
 
 use Phalcon\Events\Event;
 use Phalcon\Loader;
@@ -16,7 +16,7 @@ use Vegas\Mvc\Application\BootEventListenerInterface;
 
 /**
  * Class Boot
- * @package Vegas\Mvc\Autoloader\EventListener
+ * @package Vegas\Mvc\Application\EventListener
  */
 class Boot implements BootEventListenerInterface
 {
@@ -28,19 +28,15 @@ class Boot implements BootEventListenerInterface
      */
     public function boot(Event $event, Application $application)
     {
-        $loader = new Loader();
-
-        $namespaces = [];
-        foreach ($application->getModules() as $module) {
-            $namespaces[$module['name']] = $module['dir'];
-        }
-
         $config = $application->getConfig();
-        if (isset($config->application->autoload)) {
-            $namespaces = array_merge($namespaces, $config->application->autoload->toArray());
+        if (isset($config->application->initializers)) {
+            foreach ($config->application->initializers as $initializer) {
+                $reflection = new \ReflectionClass($initializer);
+                $initializerInstance = $reflection->newInstance();
+                if ($initializerInstance instanceof Application\InitializerInterface) {
+                    $initializerInstance->initialize($application->getDI());
+                }
+            }
         }
-
-        $loader->registerNamespaces($namespaces);
-        $loader->register();
     }
 }

@@ -14,6 +14,10 @@ use Vegas\Mvc\Application;
 use Vegas\Mvc\Application\BootEventListenerInterface;
 use Vegas\Mvc\ModuleManager;
 
+/**
+ * Class Boot
+ * @package Vegas\Mvc\ModuleManager\EventListener
+ */
 class Boot implements BootEventListenerInterface
 {
 

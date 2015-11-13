@@ -16,6 +16,7 @@ use Vegas\Mvc\ModuleManager\EventListener\Boot as ModuleManagerBootEventListener
 use Vegas\Mvc\Router\EventListener\Boot as RouterBootEventListener;
 use Vegas\Mvc\Autoloader\EventListener\Boot as AutoloaderBootEventListener;
 use Vegas\Mvc\View\EventListener\Boot as ViewBootEventListener;
+use Vegas\Mvc\Application\EventListener\Boot as ApplicationBootEventListener;
 use Vegas\Mvc\Router;
 
 /**
@@ -54,6 +55,7 @@ class Application extends \Phalcon\Mvc\Application
         parent::__construct($dependencyInjector);
         $this->config = $config;
         $this->_eventsManager = new Manager();
+        $dependencyInjector->set('config', $config);
 
         $this->attachBootstrapEvents();
     }
@@ -99,6 +101,7 @@ class Application extends \Phalcon\Mvc\Application
         $this->getEventsManager()->attach('application', new RouterBootEventListener());
         $this->getEventsManager()->attach('application', new AutoloaderBootEventListener());
         $this->getEventsManager()->attach('application', new ViewBootEventListener());
+        $this->getEventsManager()->attach('application', new ApplicationBootEventListener());
 
         return $this;
     }
