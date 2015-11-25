@@ -14,8 +14,22 @@ use Vegas\Mvc\Router\PluginInterface;
 class LocationFilter implements PluginInterface
 {
 
-    public function filter($uri, \Phalcon\Mvc\Router\Route $route)
+    /**
+     * @param $uri
+     * @return mixed
+     */
+    public function beforeMatch($uri, \Phalcon\Mvc\Router\Route $route)
     {
-        // TODO: Implement filter() method.
+        // TODO: Implement beforeMatch() method.
+    }
+
+    /**
+     * @param $uri
+     * @param \Phalcon\Mvc\Router\Route $route
+     * @return mixed
+     */
+    public function afterMatch($uri, \Phalcon\Mvc\Router\Route $route)
+    {
+        // TODO: Implement afterMatch() method.
     }
 }

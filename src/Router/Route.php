@@ -9,11 +9,16 @@
 
 namespace Vegas\Mvc\Router;
 
+use Phalcon\Di\InjectionAwareInterface;
+use Vegas\Di\InjectionAwareTrait;
+
 /**
  * Class Route
  * @package Vegas\Mvc\Router
  */
-class Route extends \Phalcon\Mvc\Router\Route
+class Route extends \Phalcon\Mvc\Router\Route implements InjectionAwareInterface
 {
+    use InjectionAwareTrait;
+
     use PluginCollectorTrait;
 }

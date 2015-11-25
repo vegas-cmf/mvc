@@ -87,7 +87,7 @@ trait PluginCollectorTrait
 
             if (!empty($this->filters)) {
                 foreach ($this->filters as $filter) {
-                    $result = $filter->beforeMatch($uri, $route) && $filter;
+                    $result = $filter->beforeMatch($uri, $route) && $result;
                 }
             }
 
@@ -119,7 +119,7 @@ trait PluginCollectorTrait
 
             if (!empty($this->filters)) {
                 foreach ($this->filters as $filter) {
-                    $result = $filter->afterMatch($uri, $route) && $filter;
+                    $result = $filter->afterMatch($uri, $route) && $result;
                 }
             }
 
@@ -128,4 +128,9 @@ trait PluginCollectorTrait
 
         return $fn;
     }
+
+    /**
+     * @return \Phalcon\DiInterface
+     */
+    abstract public function getDI();
 }

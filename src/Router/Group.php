@@ -9,12 +9,17 @@
 
 namespace Vegas\Mvc\Router;
 
+use Phalcon\Di\InjectionAwareInterface;
+use Vegas\Di\InjectionAwareTrait;
+
 /**
  * Class Group
  * @package Vegas\Mvc\Router
  */
-class Group extends \Phalcon\Mvc\Router\Group
+class Group extends \Phalcon\Mvc\Router\Group implements InjectionAwareInterface
 {
+    use InjectionAwareTrait;
+
     use PluginCollectorTrait;
 
     /**
@@ -51,6 +56,7 @@ class Group extends \Phalcon\Mvc\Router\Group
          * Every route is internally stored as a Phalcon\Mvc\Router\Route
          */
         $route = new Route($this->_prefix . $pattern, $mergedPaths, $httpMethods);
+        $route->setDI($this->getDI());
         $this->_routes[] = $route;
 
         $route->setGroup($this);

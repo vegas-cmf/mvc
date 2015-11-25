@@ -17,13 +17,13 @@ use Vegas\Tests\ApplicationTestCase;
 
 class TestPlugin implements Router\PluginInterface {
 
-    public function beforeMatch($uri, \Phalcon\Mvc\Router\Route $route)
+    public function beforeMatch($uri, \Vegas\Mvc\Router\Route $route)
     {
         echo 'beforeMatch!';
         return true;
     }
 
-    public function afterMatch($uri, \Phalcon\Mvc\Router\Route $route)
+    public function afterMatch($uri, \Vegas\Mvc\Router\Route $route)
     {
         echo 'afterMatch!';
         return true;
@@ -31,13 +31,13 @@ class TestPlugin implements Router\PluginInterface {
 }
 class TestAfterPlugin implements Router\PluginInterface {
 
-    public function beforeMatch($uri, \Phalcon\Mvc\Router\Route $route)
+    public function beforeMatch($uri, \Vegas\Mvc\Router\Route $route)
     {
         echo 'beforeMatch!';
         return true;
     }
 
-    public function afterMatch($uri, \Phalcon\Mvc\Router\Route $route)
+    public function afterMatch($uri, \Vegas\Mvc\Router\Route $route)
     {
         echo 'afterMatch!';
         return true;

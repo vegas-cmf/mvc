@@ -32,6 +32,7 @@ class Router extends \Phalcon\Mvc\Router
          * Every route is internally stored as a Phalcon\Mvc\Router\Route
          */
         $route = new Route($pattern, $paths, $httpMethods);
+        $route->setDI($this->getDI());
 
         switch ($position) {
 
@@ -56,7 +57,9 @@ class Router extends \Phalcon\Mvc\Router
      */
     public function createGroup($paths = null)
     {
-        return new Router\Group($paths);
+        $group = new Router\Group($paths);
+        $group->setDI($this->getDI());
+        return $group;
     }
 
     /**

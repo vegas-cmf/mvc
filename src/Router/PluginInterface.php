@@ -19,12 +19,12 @@ interface PluginInterface
      * @param $uri
      * @return mixed
      */
-    public function beforeMatch($uri, \Phalcon\Mvc\Router\Route $route);
+    public function beforeMatch($uri, \Vegas\Mvc\Router\Route $route);
 
     /**
      * @param $uri
-     * @param \Phalcon\Mvc\Router\Route $route
+     * @param Route $route
      * @return mixed
      */
-    public function afterMatch($uri, \Phalcon\Mvc\Router\Route $route);
+    public function afterMatch($uri, \Vegas\Mvc\Router\Route $route);
 }

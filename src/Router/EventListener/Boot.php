@@ -31,6 +31,7 @@ class Boot implements BootEventListenerInterface
     {
         // Initializes router
         $router = new Router(false);
+        $router->setDI($application->getDI());
         // default routes
         if (isset($application->getConfig()->application->defaultRoutes)) {
             $defaultRoutesPath = $application->getConfig()->application->defaultRoutes;
