@@ -14,8 +14,6 @@ use Vegas\Mvc\Router\Route;
 
 /**
  * Class Router
- * @package Vegas\Mvc
- *
  * @method \Vegas\Mvc\Router\Route addGet($pattern, $paths = null, $position = Router::POSITION_LAST)
  * @method \Vegas\Mvc\Router\Route addPost($pattern, $paths = null, $position = Router::POSITION_LAST)
  * @method \Vegas\Mvc\Router\Route addDelete($pattern, $paths = null, $position = Router::POSITION_LAST)
@@ -23,6 +21,8 @@ use Vegas\Mvc\Router\Route;
  * @method \Vegas\Mvc\Router\Route addPut($pattern, $paths = null, $position = Router::POSITION_LAST)
  * @method \Vegas\Mvc\Router\Route addOptions($pattern, $paths = null, $position = Router::POSITION_LAST)
  * @method \Vegas\Mvc\Router\Route addHead($pattern, $paths = null, $position = Router::POSITION_LAST)
+ *
+ * @package Vegas\Mvc
  */
 class Router extends \Phalcon\Mvc\Router
 {

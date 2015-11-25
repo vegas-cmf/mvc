@@ -14,6 +14,14 @@ use Vegas\Di\InjectionAwareTrait;
 
 /**
  * Class Group
+ * @method \Vegas\Mvc\Router\Route addGet($pattern, $paths = null)
+ * @method \Vegas\Mvc\Router\Route addPost($pattern, $paths = null)
+ * @method \Vegas\Mvc\Router\Route addDelete($pattern, $paths = null)
+ * @method \Vegas\Mvc\Router\Route addPatch($pattern, $paths = null)
+ * @method \Vegas\Mvc\Router\Route addPut($pattern, $paths = null)
+ * @method \Vegas\Mvc\Router\Route addOptions($pattern, $paths = null)
+ * @method \Vegas\Mvc\Router\Route addHead($pattern, $paths = null)
+ * 
  * @package Vegas\Mvc\Router
  */
 class Group extends \Phalcon\Mvc\Router\Group implements InjectionAwareInterface
