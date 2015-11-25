@@ -1,7 +1,7 @@
 <?php
 use Vegas\Tests\Mvc\Router\TestAfterPlugin;
 use Vegas\Tests\Mvc\Router\TestPlugin;
-
+/** @var \Vegas\Mvc\Router $router */
 $router->add('/test', [
     'module' => 'Test',
     'controller' => 'Frontend\Index',
