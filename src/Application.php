@@ -381,6 +381,10 @@ class Application extends \Phalcon\Mvc\Application
         $response->sendHeaders();
         $response->sendCookies();
 
+        if (!$response->isSent()) {
+            $response->send();
+        }
+
         /**
          * Return the response
          */
