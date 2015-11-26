@@ -20,7 +20,9 @@ abstract class ControllerAbstract extends \Phalcon\Mvc\Controller
      */
     protected function jsonResponse($data = array())
     {
-        $this->view->disable();
+        if ($this->view instanceof \Phalcon\Mvc\View) {
+            $this->view->disable();
+        }
         $this->response->setContentType('application/json', 'UTF-8');
 
         return $this->response->setJsonContent($data);
