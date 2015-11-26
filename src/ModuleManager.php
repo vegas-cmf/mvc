@@ -76,7 +76,7 @@ class ModuleManager implements \Phalcon\Di\InjectionAwareInterface
     {
         $availableModules = [];
         foreach ($modules as $moduleName => &$moduleConfig) {
-            if (!$moduleName) {
+            if (!is_string($moduleName)) {
                 $moduleName = $moduleConfig;
                 $moduleConfig = [];
             }
