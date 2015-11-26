@@ -97,9 +97,9 @@ class Application extends \Phalcon\Mvc\Application
      */
     protected function attachBootstrapEvents()
     {
-        $this->getEventsManager()->attach('application', new ModuleManagerBootEventListener());
-        $this->getEventsManager()->attach('application', new RouterBootEventListener());
         $this->getEventsManager()->attach('application', new AutoloaderBootEventListener());
+        $this->getEventsManager()->attach('application', new RouterBootEventListener());
+        $this->getEventsManager()->attach('application', new ModuleManagerBootEventListener());
         $this->getEventsManager()->attach('application', new ViewBootEventListener());
         $this->getEventsManager()->attach('application', new ApplicationBootEventListener());
 
