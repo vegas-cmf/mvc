@@ -29,9 +29,9 @@ class Boot implements BootEventListenerInterface
     public function boot(Event $event, Application $application)
     {
         $config = $application->getConfig();
-        if (isset($config->sharedServices)) {
+        if (isset($config->application->sharedServices) && $config->application->sharedServices) {
             $injector = new Injector($application->getDI());
-            $injector->inject($config->sharedServices->toArray());
+            $injector->inject($config->application->sharedServices->toArray());
         }
     }
 }
