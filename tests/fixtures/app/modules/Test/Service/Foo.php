@@ -10,9 +10,12 @@
 namespace Test\Service;
 
 use Phalcon\DI\InjectionAwareInterface;
+use Vegas\Di\InjectionAwareTrait;
 
-class Foo
+class Foo implements InjectionAwareInterface
 {
+    use InjectionAwareTrait;
+
     public function __construct($params)
     {
         print_r($params);

@@ -14,6 +14,7 @@ use Vegas\Mvc\Router\Route;
 
 /**
  * Class Router
+ *
  * @method \Vegas\Mvc\Router\Route addGet($pattern, $paths = null, $position = Router::POSITION_LAST)
  * @method \Vegas\Mvc\Router\Route addPost($pattern, $paths = null, $position = Router::POSITION_LAST)
  * @method \Vegas\Mvc\Router\Route addDelete($pattern, $paths = null, $position = Router::POSITION_LAST)

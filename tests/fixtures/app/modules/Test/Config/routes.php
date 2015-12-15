@@ -8,9 +8,8 @@ $router->add('/test', [
     'action' => 'index'
 ])
     ->pushFilter(
-        new TestPlugin()
+        new \Test\Filter\TestFilter()
     )
-    ->pushFilter(new TestAfterPlugin())
     ->beforeMatch(function($uri, $route) {
         echo "BeforeMatch!";
         return true;

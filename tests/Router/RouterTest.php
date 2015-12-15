@@ -15,45 +15,49 @@ use Phalcon\Mvc\View;
 use Vegas\Mvc\Router;
 use Vegas\Tests\ApplicationTestCase;
 
-class TestPlugin implements Router\PluginInterface {
-
-    public function beforeMatch($uri, \Vegas\Mvc\Router\Route $route)
-    {
-        echo 'beforeMatch!';
-        return true;
-    }
-
-    public function afterMatch($uri, \Vegas\Mvc\Router\Route $route)
-    {
-        echo 'afterMatch!';
-        return true;
-    }
-}
-class TestAfterPlugin implements Router\PluginInterface {
-
-    public function beforeMatch($uri, \Vegas\Mvc\Router\Route $route)
-    {
-        echo 'beforeMatch!';
-        return true;
-    }
-
-    public function afterMatch($uri, \Vegas\Mvc\Router\Route $route)
-    {
-        echo 'afterMatch!';
-        return true;
-    }
-}
-
 class RouterTest extends ApplicationTestCase
 {
-
-    public function testRouteMatching()
+    public function testShouldRunPluginFilter()
     {
-        $response = $this->app->handle('/test');
-//        echo $response->getContent();
-//        $response = $this->app->handle('/test/ip');
-//        echo $response->getContent();
-//
-        $this->di->get('Test\Service\Foo', [123])->bar();
+        $mock = $this->getMockForAbstractClass('\Vegas\Mvc\Router\PluginInterface');
+        $mock->expects($this->once())
+            ->method('beforeMatch')
+            ->willReturn(true);
+
+        $mock->expects($this->once())
+            ->method('afterMatch')
+            ->willReturn(true);
+
+        $router = new Router(false);
+        $router->setDI(\Phalcon\Di::getDefault());
+        $router->add('/test', [
+            'controller' => 'Test',
+            'action' => 'index'
+        ])->pushFilter($mock);
+
+
+        $router->handle('/test');
+    }
+
+    public function testShouldRunPluginEvent()
+    {
+        $mock = $this->getMockForAbstractClass('\Vegas\Mvc\Router\PluginInterface');
+        $mock->expects($this->once())
+            ->method('beforeMatch')
+            ->willReturn(true);
+
+        $mock->expects($this->once())
+            ->method('afterMatch')
+            ->willReturn(true);
+
+        $router = new Router(false);
+        $router->setDI(\Phalcon\Di::getDefault());
+        $router->add('/test', [
+            'controller' => 'Test',
+            'action' => 'index'
+        ])->pushEvent($mock);
+
+
+        $router->handle('/test');
     }
 }

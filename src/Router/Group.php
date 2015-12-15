@@ -14,6 +14,7 @@ use Vegas\Di\InjectionAwareTrait;
 
 /**
  * Class Group
+ *
  * @method \Vegas\Mvc\Router\Route addGet($pattern, $paths = null)
  * @method \Vegas\Mvc\Router\Route addPost($pattern, $paths = null)
  * @method \Vegas\Mvc\Router\Route addDelete($pattern, $paths = null)
