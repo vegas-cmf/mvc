@@ -24,6 +24,8 @@ use Vegas\Di\InjectionAwareTrait;
  * @method \Vegas\Mvc\Router\Route addHead($pattern, $paths = null)
  * 
  * @package Vegas\Mvc\Router
+ *
+ * @codeCoverageIgnore
  */
 class Group extends \Phalcon\Mvc\Router\Group implements InjectionAwareInterface
 {

@@ -59,4 +59,5 @@ abstract class ApplicationTestCase extends \PHPUnit_Framework_TestCase
         $this->di = $this->app->getDI();
         $this->config = $this->app->getConfig();
     }
+
 }
