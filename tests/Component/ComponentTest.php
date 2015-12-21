@@ -114,5 +114,8 @@ class ComponentTest extends ApplicationTestCase
         $this->assertFalse($component->isInitialized());
         $component->getRender();
         $this->assertEquals(2, $component->initCounter);
+
+        unset($component->initCounter);
+        $this->assertTrue(!isset($component->initCounter));
     }
 }

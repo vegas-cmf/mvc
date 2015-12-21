@@ -11,6 +11,7 @@ namespace Vegas\Tests\Mvc\Router;
 
 use Phalcon\DI;
 use Phalcon\Loader;
+use Phalcon\Mvc\Router\Exception;
 use Phalcon\Mvc\View;
 use Vegas\Mvc\Router;
 use Vegas\Tests\ApplicationTestCase;
@@ -33,7 +34,7 @@ class RouterTest extends ApplicationTestCase
         $router->add('/test', [
             'controller' => 'Test',
             'action' => 'index'
-        ])->pushFilter($mock);
+        ])->pushFilters([$mock]);
 
 
         $router->handle('/test');
@@ -55,9 +56,45 @@ class RouterTest extends ApplicationTestCase
         $router->add('/test', [
             'controller' => 'Test',
             'action' => 'index'
-        ])->pushEvent($mock);
+        ])->pushEvents([$mock]);
 
 
         $router->handle('/test');
+    }
+
+    public function testCreateGroup()
+    {
+        $router = new Router(false);
+        $router->setDI(\Phalcon\Di::getDefault());
+        $group = $router->createGroup([
+            'module' => 'Test',
+            'controller' => 'Index'
+        ]);
+        $group->setPrefix('vegas/test');
+
+        $this->assertInstanceOf('\Phalcon\DiInterface', $group->getDI());
+    }
+
+    public function testCheckRouteFirstPosition()
+    {
+        $router = new Router(false);
+        $router->setDI(\Phalcon\Di::getDefault());
+        $router->add('/test', [
+            'controller' => 'Test',
+            'action' => 'index'
+        ], ['GET'], \Phalcon\Mvc\Router::POSITION_FIRST);
+    }
+
+    /**
+     * @expectedException Exception
+     */
+    public function testCheckRouteException()
+    {
+        $router = new Router(false);
+        $router->setDI(\Phalcon\Di::getDefault());
+        $router->add('/test', [
+            'controller' => 'Test',
+            'action' => 'index'
+        ], ['GET'], 2);
     }
 }

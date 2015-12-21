@@ -15,6 +15,8 @@ use Vegas\Di\InjectionAwareTrait;
 /**
  * Class Route
  * @package Vegas\Mvc\Router
+ *
+ * @codeCoverageIgnore
  */
 class Route extends \Phalcon\Mvc\Router\Route implements InjectionAwareInterface
 {
