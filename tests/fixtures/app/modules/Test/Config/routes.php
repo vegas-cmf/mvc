@@ -20,3 +20,9 @@ $router->add('/test-view', [
     'controller' => 'Index',
     'action' => 'index'
 ]);
+
+$router->add('/test-json-view', [
+    'module' => 'Test',
+    'controller' => 'Index',
+    'action' => 'ip'
+]);

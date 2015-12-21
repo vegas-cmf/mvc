@@ -10,8 +10,9 @@
 namespace Test\Controller;
 
 use Test\Model\Test;
+use Vegas\Mvc\ControllerAbstract;
 
-class IndexController extends \Phalcon\Mvc\Controller
+class IndexController extends ControllerAbstract
 {
     public function indexAction()
     {
@@ -20,8 +21,6 @@ class IndexController extends \Phalcon\Mvc\Controller
 
     public function ipAction()
     {
-        $this->response->setHeader('Content-Type', 'application/json');
-        $this->response->setJsonContent(['test' => 1]);
-        return $this->response;
+        return $this->jsonResponse(['test' => 1]);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 return [
     'application' => [
+        'environment' => \Vegas\Mvc\Application::DEV_ENV,
         'modules' => [
             'Test'
         ],

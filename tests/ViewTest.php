@@ -27,4 +27,12 @@ class ViewTest extends ApplicationTestCase
         $this->assertNotEmpty($response->getContent());
     }
 
+    public function testJsonView()
+    {
+        ob_start();
+        $response = $this->app->handle('/test-json-view');
+        ob_get_clean();
+        $this->assertJson($response->getContent());
+    }
+
 }

@@ -27,6 +27,16 @@ use Vegas\Mvc\Router;
 class Application extends \Phalcon\Mvc\Application
 {
     /**
+     * @const string
+     */
+    const DEV_ENV = 'development';
+
+    /**
+     * @const string
+     */
+    const PROD_ENV = 'production';
+
+    /**
      * @var string
      */
     protected $applicationDirectory;
