@@ -321,14 +321,14 @@ class Application extends \Phalcon\Mvc\Application
                             if (isset($module)) {
                                 $di->get('view')->render(
                                     sprintf(
-                                        '%s/%s',
-                                        $module['viewsDir'],
+                                        '%s/View/%s',
+                                        $module['name'],
                                         ltrim(str_replace('\\', '/', $dispatcher->getControllerName()), '/')
                                     ),
                                     $dispatcher->getActionName(),
                                     $dispatcher->getParams()
                                 );
-                                $di->get('view')->setViewsDir(APP_ROOT . '/app/');
+//                                $di->get('view')->setViewsDir(APP_ROOT . '/app/');
                             } else {
                                 $di->get('view')->render(
                                     $dispatcher->getControllerName(),
