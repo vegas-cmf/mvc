@@ -33,6 +33,9 @@ class BootTest extends \PHPUnit_Framework_TestCase
 
         $bootInstance = new \Vegas\Mvc\ModuleManager\EventListener\Boot();
         $bootInstance->boot(new Event('test', $this,  [], false), $this->app);
+
+        $bootInstance = new \Vegas\Mvc\Autoloader\EventListener\Boot();
+        $bootInstance->boot(new Event('test', $this,  [], false), $this->app);
     }
 
     public function testBootView()

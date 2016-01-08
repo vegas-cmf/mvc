@@ -14,3 +14,15 @@ $router->add('/test', [
         echo "BeforeMatch!";
         return true;
     });
+
+$router->add('/test-view', [
+    'module' => 'Test',
+    'controller' => 'Index',
+    'action' => 'index'
+]);
+
+$router->add('/test-json-view', [
+    'module' => 'Test',
+    'controller' => 'Index',
+    'action' => 'ip'
+]);

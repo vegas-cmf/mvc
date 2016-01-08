@@ -40,12 +40,13 @@ class BootTest extends \PHPUnit_Framework_TestCase
         $namespaces = (new Boot())->getNamespaces($this->app);
         $appDirectory = APP_ROOT . '/app';
 
-        $this->assertCount(3, $namespaces);
+        $this->assertCount(4, $namespaces);
 
         $this->assertSame([
             'Test' => $appDirectory . '/modules/Test',
             'App\Initializer' => $appDirectory . '/initializers',
             'App\Shared' => $appDirectory . '/shared',
+            'App\View' => $appDirectory . '/view',
         ], $namespaces);
 
     }

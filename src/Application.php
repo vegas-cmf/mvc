@@ -27,6 +27,16 @@ use Vegas\Mvc\Router;
 class Application extends \Phalcon\Mvc\Application
 {
     /**
+     * @const string
+     */
+    const DEV_ENV = 'development';
+
+    /**
+     * @const string
+     */
+    const PROD_ENV = 'production';
+
+    /**
      * @var string
      */
     protected $applicationDirectory;
@@ -321,14 +331,13 @@ class Application extends \Phalcon\Mvc\Application
                             if (isset($module)) {
                                 $di->get('view')->render(
                                     sprintf(
-                                        '%s/%s',
-                                        $module['viewsDir'],
+                                        'modules/%s/View/%s',
+                                        $module['name'],
                                         ltrim(str_replace('\\', '/', $dispatcher->getControllerName()), '/')
                                     ),
                                     $dispatcher->getActionName(),
                                     $dispatcher->getParams()
                                 );
-                                $di->get('view')->setViewsDir(APP_ROOT . '/app/');
                             } else {
                                 $di->get('view')->render(
                                     $dispatcher->getControllerName(),
