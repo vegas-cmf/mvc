@@ -9,6 +9,10 @@
 
 namespace Vegas\Mvc;
 
+/**
+ * Class ControllerAbstract
+ * @package Vegas\Mvc
+ */
 abstract class ControllerAbstract extends \Phalcon\Mvc\Controller
 {
     /**
@@ -20,9 +24,11 @@ abstract class ControllerAbstract extends \Phalcon\Mvc\Controller
      */
     protected function jsonResponse($data = array())
     {
-        $view = $this->di->get('view');
-        if ($view instanceof \Phalcon\Mvc\View) {
-            $view->disable();
+        if ($this->di->has('view')) {
+            $view = $this->di->get('view');
+            if ($view instanceof \Phalcon\Mvc\View) {
+                $view->disable();
+            }
         }
         $this->response->setContentType('application/json', 'UTF-8');
 
