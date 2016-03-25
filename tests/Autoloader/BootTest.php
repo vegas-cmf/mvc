@@ -44,9 +44,9 @@ class BootTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame([
             'Test' => $appDirectory . '/modules/Test',
-            'App\Initializer' => $appDirectory . '/initializers/',
-            'App\Shared' => $appDirectory . '/shared/',
-            'App\View' => $appDirectory . '/view/',
+            'App\Initializer' => $appDirectory . '/initializers',
+            'App\Shared' => $appDirectory . '/shared',
+            'App\View' => $appDirectory . '/view',
         ], $namespaces);
 
     }
