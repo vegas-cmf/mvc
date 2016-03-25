@@ -22,7 +22,7 @@ before_script:
   - php composer.phar install --dev
 
 script:
-  - cp tests/config.sample.php tests/config.php
+  - cp tests/fixtures/app/config/config.sample.php tests/fixtures/app/config/config.php
   - mkdir -p tests/fixtures/cache
   - mkdir -p tests/fixtures/tmp
   - mkdir -p build/logs
