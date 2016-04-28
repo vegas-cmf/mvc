@@ -20,7 +20,7 @@
         "php": ">=5.4",
         "ext-phalcon": ">=2.0",
         "phalcon/incubator": ">=2.0",
-        "vegas-cmf/common" : "*"
+        "vegas-cmf/common" : "2.*"
     },
     "require-dev": {
         "phalcon/devtools" : "2.0.8",
