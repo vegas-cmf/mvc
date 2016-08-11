@@ -39,9 +39,9 @@ class Manager implements InjectionAwareInterface
 
     /**
      * @param $instance
-     * @param Collection $annotations
+     * @param $annotations
      */
-    public function injectToProperties(& $instance, Collection $annotations)
+    public function injectToProperties(& $instance, $annotations)
     {
         if ($annotations) {
 
