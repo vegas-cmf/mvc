@@ -16,11 +16,6 @@ class Foo implements InjectionAwareInterface
 {
     use InjectionAwareTrait;
 
-    public function __construct($params)
-    {
-        print_r($params);
-    }
-
     public function initialize()
     {
 

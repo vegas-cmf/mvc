@@ -55,8 +55,6 @@ class DiInjectorTest extends ApplicationTestCase
     public function testPreventLoopInjectionClass()
     {
         $component = self::$application->getDI()->get(Loop::class);
-        //$this->assertInstanceOf('Test\\Service\\FakeService', $component->fakeService);
-
     }
 
     public function testInjectTwoLevel()
