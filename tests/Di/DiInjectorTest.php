@@ -13,6 +13,7 @@ use Phalcon\DI\FactoryDefault;
 use Test\Service\Bar;
 use Test\Service\InjectorFoo;
 use Test\Service\InjectorPrivate;
+use Test\Service\Loop;
 use Vegas\Mvc\Di;
 use Vegas\Mvc\Router;
 use Vegas\Tests\ApplicationTestCase;
@@ -48,6 +49,13 @@ class DiInjectorTest extends ApplicationTestCase
         /** @var InjectorComponent $component */
         $component = $this->di->get(InjectorPrivate::class);
         $this->assertInstanceOf('Test\\Service\\FakeService', $component->fakeService);
+
+    }
+
+    public function testPreventLoopInjectionClass()
+    {
+        $component = self::$application->getDI()->get(Loop::class);
+        //$this->assertInstanceOf('Test\\Service\\FakeService', $component->fakeService);
 
     }
 

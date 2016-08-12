@@ -12,26 +12,15 @@ namespace Test\Service;
 use Phalcon\DI\InjectionAwareInterface;
 use Vegas\Di\InjectionAwareTrait;
 
-class InjectorFoo implements InjectionAwareInterface
+class Loop implements InjectionAwareInterface
 {
     use InjectionAwareTrait;
 
     /**
-     * @var FakeService
-     * @inject(class=\Test\Service\FakeService)
+     * @var Loop
+     * @inject(class=\Test\Service\Loop)
      */
-    public $fakeService;
-
-    /**
-     * @var Foo
-     * @inject(class=\Test\Service\Foo)
-     */
-    public $foo;
-
-    public function initialize()
-    {
-
-    }
+    protected $loop;
 
     public function bar()
     {

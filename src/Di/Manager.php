@@ -52,6 +52,10 @@ class Manager implements InjectionAwareInterface
                     $injectAnnotation = $property->get('inject');
                     $injectClassName = $injectAnnotation->getArgument('class');
 
+                    if ('\\' . get_class($instance) == $injectClassName) {
+                        continue;
+                    }
+
                     $reflectionClass = new \ReflectionClass($instance);
                     $reflectionProperty = $reflectionClass->getProperty($key);
                     $reflectionProperty->setAccessible(true);
