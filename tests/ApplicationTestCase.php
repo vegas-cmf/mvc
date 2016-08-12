@@ -23,7 +23,7 @@ abstract class ApplicationTestCase extends \PHPUnit_Framework_TestCase
     /**
      * @var \Vegas\Mvc\Application
      */
-    private static $application;
+    protected static $application;
 
     /**
      * @var \Vegas\Mvc\Application
