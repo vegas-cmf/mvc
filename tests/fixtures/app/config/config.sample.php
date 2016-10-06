@@ -7,10 +7,12 @@ return [
         'autoload' => [
             'App\Initializer' => TESTS_ROOT_DIR . '/fixtures/app/initializers',
             'App\Shared' => TESTS_ROOT_DIR . '/fixtures/app/shared',
-            'App\View' => TESTS_ROOT_DIR . '/fixtures/app/view'
+            'App\View' => TESTS_ROOT_DIR . '/fixtures/app/view',
+            'Lib' => TESTS_ROOT_DIR . '/fixtures/lib'
         ],
         'modulesDirectory' => APP_ROOT . '/app/modules',
         'sharedServices' => [
+            'App\Shared\TestService',
             'App\Shared\ViewCache'
         ],
         'initializers'=> [
