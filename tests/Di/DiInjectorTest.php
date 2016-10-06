@@ -9,6 +9,7 @@
 
 namespace Vegas\Tests\Mvc\Di;
 
+use Lib\LibTestClass;
 use Phalcon\DI\FactoryDefault;
 use Test\Service\Bar;
 use Test\Service\InjectorFoo;
@@ -46,7 +47,7 @@ class DiInjectorTest extends ApplicationTestCase
 
     public function testPrivateInjectClass()
     {
-        /** @var InjectorComponent $component */
+        /** @var InjectorPrivate $component */
         $component = $this->di->get(InjectorPrivate::class);
         $this->assertInstanceOf('Test\\Service\\FakeService', $component->fakeService);
 
@@ -63,6 +64,18 @@ class DiInjectorTest extends ApplicationTestCase
         $bar = self::$application->getDI()->get(Bar::class);
         $this->assertInstanceOf('Test\\Service\\InjectorFoo', $bar->fooService);
         $this->assertInstanceOf('Test\\Service\\FakeService', $bar->fooService->fakeService);
+    }
+
+    public function testInjectLibClass()
+    {
+        /** @var LibTestClass $testLibClass */
+        $testLibClass = self::$application->getDI()->get(LibTestClass::class);
+        $this->assertInstanceOf('Lib\\InjectableClass', $testLibClass->testService);
+
+        /** @var LibTestClass $testClass */
+        $testClass = self::$application->getDI()->get('testService');
+        $this->assertInstanceOf('Lib\\InjectableClass', $testClass->testService);
+
     }
 
 
