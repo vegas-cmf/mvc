@@ -251,7 +251,13 @@ class Application extends \Phalcon\Mvc\Application
         $dispatcher->setActionName($router->getActionName());
         $dispatcher->setParams($router->getParams());
 
+        if ($dispatcher->getEventsManager() == null) {
+            $eventsManager = new Manager();
+            $dispatcher->setEventsManager($eventsManager);
+        }
+
         if ($di->has('view') && $this->_implicitView) {
+            $di->get('view')->setEventsManager($dispatcher->getEventsManager());
             $di->get('view')->start();
         }
 
