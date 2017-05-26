@@ -35,8 +35,8 @@ class Volt implements InitializerInterface
                 $viewEngines = [];
             }
 
-            $viewEngines['.volt'] = function ($this, $di) use ($viewConfig) {
-                $volt = new VoltEngine($this, $di);
+            $viewEngines['.volt'] = function ($ctx, $di) use ($viewConfig) {
+                $volt = new VoltEngine($ctx, $di);
                 $volt->setOptions($viewConfig);
 
                 $volt->getCompiler()->addFilter('toString', (new ToStringFilter())->getFilter());

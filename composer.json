@@ -12,18 +12,17 @@
     "repositories": [
         {
             "type" : "git",
-            "url" : "https://github.com/vegas-cmf/common.git",
-            "branch" : "master"
+            "url" : "https://github.com/vegas-cmf/common.git"
         }
     ],
     "require": {
-        "php": ">=5.4",
-        "ext-phalcon": ">=2.0",
-        "phalcon/incubator": ">=2.0",
-        "vegas-cmf/common" : "2.*"
+        "php": ">=7",
+        "ext-phalcon": ">=3",
+        "phalcon/incubator": ">=3",
+        "vegas-cmf/common" : "3.*"
     },
     "require-dev": {
-        "phalcon/devtools" : "2.0.8",
+        "phalcon/devtools" : "^3.0",
         "phpunit/phpunit": "4.*",
         "satooshi/php-coveralls": "dev-master",
         "twig/twig": "~1.0"

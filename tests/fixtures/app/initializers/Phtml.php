@@ -34,8 +34,8 @@ class Phtml implements InitializerInterface
                 $viewEngines = [];
             }
 
-            $viewEngines['.phtml'] = function ($this, $di) use ($view, $viewConfig) {
-                return new \Phalcon\Mvc\View\Engine\Php($this, $di);
+            $viewEngines['.phtml'] = function ($ctx, $di) use ($view, $viewConfig) {
+                return new \Phalcon\Mvc\View\Engine\Php($ctx, $di);
             };
 
             $view->registerEngines($viewEngines);

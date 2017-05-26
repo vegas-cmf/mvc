@@ -34,8 +34,8 @@ class Twig implements InitializerInterface
                 $viewEngines = [];
             }
 
-            $viewEngines['.twig'] = function ($this, $di) use ($viewConfig) {
-                return new \Phalcon\Mvc\View\Engine\Twig($this, $di, $viewConfig);
+            $viewEngines['.twig'] = function ($ctx, $di) use ($viewConfig) {
+                return new \Phalcon\Mvc\View\Engine\Twig($ctx, $di, $viewConfig);
             };
 
             $view->registerEngines($viewEngines);
