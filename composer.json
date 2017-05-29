@@ -9,17 +9,12 @@
             "email": "vegas@amsterdam-standard.pl"
         }
     ],
-    "repositories": [
-        {
-            "type" : "git",
-            "url" : "https://github.com/vegas-cmf/common.git"
-        }
-    ],
+    "repositories": [],
     "require": {
         "php": ">=7",
         "ext-phalcon": ">=3",
         "phalcon/incubator": ">=3",
-        "vegas-cmf/common" : "3.*"
+        "vegas-cmf/common" : "v3.0.0"
     },
     "require-dev": {
         "phalcon/devtools" : "^3.0",
